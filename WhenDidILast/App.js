@@ -8,12 +8,10 @@
 
 import React from 'react';
 import { View, Text } from 'react-native';
-
+import Login from './src/pages/login';
 
 export default function App(){
   return(
-    <View>
-      <Text>This is the new most amazing thing</Text>
-    </View>
+    <Login />
   );
 }
