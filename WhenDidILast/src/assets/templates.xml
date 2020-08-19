@@ -1,15 +1,15 @@
 
 <Samples>
 	<EmptyScreen>
-        import React from 'react';
-        import { View, Text } from "react-native";
+import React from 'react';
+import { View, Text } from "react-native";
 
-        export default function Sample(){
-            return(
-            <View>
-                <Text>The wonderful sample page</Text>
-            </View>
-            );
-        }
+export default function Sample(){
+    return(
+    <View>
+        <Text>The wonderful sample page</Text>
+    </View>
+    );
+}
 	</EmptyScreen>
 </Samples>
