@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet, Alert} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
 export default function Login() {
-  const [email, setEmail] = useState('E-mail');
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   function doLogin() {
@@ -12,7 +12,7 @@ export default function Login() {
       .then(() => Alert.alert('Successful login'))
       .catch((error) => {
         if (error.code === 'auth/email-already-in-use') {
-          Alert.alert('That email address is already in use!');
+          auth().signInWithEmailAndPassword(email, password);
         }
 
         if (error.code === 'auth/invalid-email') {
@@ -32,7 +32,7 @@ export default function Login() {
         keyboardType="email-address"
         style={style.inputs}
         onChangeText={(email) => setEmail(email)}
-        placeholder={email}
+        placeholder='E-mail'
       />
       <TextInput
         style={style.inputs}
