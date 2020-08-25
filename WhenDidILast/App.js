@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import auth from '@react-native-firebase/auth';
 
 import Dashboard from './src/pages/dashboard';
-import Login from './src/pages/login';
+import Login from './src/pages/login/email';
 import LoginOptions from './src/pages/loginOptions';
 import SplashScreen from './src/pages/splash';
 
