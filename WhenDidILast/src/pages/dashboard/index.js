@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import auth from '@react-native-firebase/auth';
+import { Title, Button } from 'react-native-paper';
 
 export default function Dashboard() {
   function logout() {
@@ -8,9 +9,24 @@ export default function Dashboard() {
   }
 
   return (
-    <View>
-      <Text>Yay, youre in</Text>
-      <Button title="Go Back Out" onPress={logout} />
+    <View style={style.View}>
+      <Title>Yay, youre in</Title>
+      <Button
+        style={style.Button}
+        mode="contained"
+        onPress={logout}>Go Back Out</Button>
     </View>
   );
 }
+
+const style = StyleSheet.create({
+  View: {
+    alignItems: 'center',
+  },
+
+  Button: {
+    marginTop: 40,
+    width: 253,
+    height: 42,
+  }
+});

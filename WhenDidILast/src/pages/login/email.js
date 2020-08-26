@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { TextInput, Button, Title } from "react-native-paper";
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
 export default function Login() {
@@ -26,34 +27,45 @@ export default function Login() {
   }
 
   return (
-    <View>
-      <Text>The wonderful login page</Text>
+    <View style={style.View}>
+      <Title style={style.Titulo}>Informe seu e-mail e senha</Title>
+      <View>
       <TextInput
         keyboardType="email-address"
+        
         style={style.inputs}
         onChangeText={(email) => setEmail(email)}
+        label='E-mail'
         placeholder='E-mail'
       />
       <TextInput
         style={style.inputs}
         onChangeText={(pass) => setPassword(pass)}
-        placeholder="Password"
+        label="Senha"
+        placeholder="Senha"
         secureTextEntry
       />
-      <Button style={style.botao} title="Login" onPress={doLogin} />
+      <Button style={style.Button}  onPress={doLogin}>Entrar</Button>
+    </View>
     </View>
   );
 }
 
 const style = StyleSheet.create({
-  inputs: {
+  inputs: { 
     height: 50,
-    borderColor: 'gray',
-    borderWidth: 1,
     margin: 20,
+  }, 
+  Titulo:{
+    alignSelf: 'center'
   },
-  botao: {
-    height: 50,
-    width: 30,
-  },
+  View: {
+    flex: 1,
+    justifyContent: 'center', 
+    padding: 10,
+},
+
+  Button: { 
+    justifyContent: 'center',
+  }
 });
