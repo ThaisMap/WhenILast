@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
-import { TextInput, Button, Title } from "react-native-paper";
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { TextInput, Button, Title, FAB } from "react-native-paper";
+import { View, StyleSheet, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-export default function Login() {
+export default function Login({navigation}) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   function doLogin() {
     auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => Alert.alert('Successful login'))
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {})
       .catch((error) => {
-        if (error.code === 'auth/email-already-in-use') {
-          auth().signInWithEmailAndPassword(email, password);
+        if (error.code === 'auth/wrong-password') {
+          Alert.alert('Senha incorreta!');
         }
-
-        if (error.code === 'auth/invalid-email') {
-          Alert.alert('That email address is invalid!');
+        if (error.code === 'auth/user-not-found') {
+          Alert.alert('E-mail não cadastrado! ');
         }
-
         console.log(error.code);
       });
     console.log(email);
@@ -27,45 +25,53 @@ export default function Login() {
   }
 
   return (
-    <View style={style.View}>
+    <View style={style.sentence}>
       <Title style={style.Titulo}>Informe seu e-mail e senha</Title>
-      <View>
-      <TextInput
-        keyboardType="email-address"
-        
-        style={style.inputs}
-        onChangeText={(email) => setEmail(email)}
-        label='E-mail'
-        placeholder='E-mail'
-      />
-      <TextInput
-        style={style.inputs}
-        onChangeText={(pass) => setPassword(pass)}
-        label="Senha"
-        placeholder="Senha"
-        secureTextEntry
-      />
-      <Button style={style.Button}  onPress={doLogin}>Entrar</Button>
-    </View>
+      <View >
+        <TextInput
+          keyboardType="email-address"
+
+          style={style.inputs}
+          onChangeText={(email) => setEmail(email)}
+          label='E-mail'
+          placeholder='E-mail'
+        />
+        <TextInput
+          style={style.inputs}
+          onChangeText={(pass) => setPassword(pass)}
+          label="Senha"
+          placeholder="Senha"
+          secureTextEntry
+        />
+        <Button style={style.Button} onPress={doLogin}>Entrar</Button>
+
+      </View>
+        <FAB style={style.fab} icon="plus" onPress={() => navigation.navigate('SignUp')} />
     </View>
   );
 }
 
 const style = StyleSheet.create({
-  inputs: { 
+  inputs: {
     height: 50,
     margin: 20,
-  }, 
-  Titulo:{
-    alignSelf: 'center'
   },
-  View: {
+  Titulo: {
+    alignSelf: 'center'
+  }, 
+  sentence: {
     flex: 1,
-    justifyContent: 'center', 
-    padding: 10,
-},
-
-  Button: { 
     justifyContent: 'center',
-  }
+    alignItems: 'stretch',
+    margin: 30,
+},
+  Button: {
+    justifyContent: 'center',
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
 });

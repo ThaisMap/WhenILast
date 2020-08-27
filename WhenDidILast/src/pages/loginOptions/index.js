@@ -22,7 +22,14 @@ async function onGoogleButtonPress() {
 export default function LoginOptions({ navigation }) {
   return (
     <View style={style.View}> 
-      <Title>Here you have these great options</Title>
+      <Title>As opções são poucas e boas</Title>
+      <Button
+        icon="google"
+        mode="contained"
+        style={style.Button}
+        onPress={onGoogleButtonPress}>Login com o Google
+      </Button>
+
       <Button
         style={style.Button}
         icon="email"
@@ -30,12 +37,7 @@ export default function LoginOptions({ navigation }) {
         onPress={() => navigation.navigate('EmailLogin')} >
         Login com seu e-mail
       </Button>
-      <Button
-        icon="google"
-        mode="contained"
-        style={style.Button}
-        onPress={onGoogleButtonPress}>Login com o Google
-      </Button>
+
 
     </View>
   );
