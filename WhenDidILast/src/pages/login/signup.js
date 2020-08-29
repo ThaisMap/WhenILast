@@ -32,28 +32,25 @@ export default function Signup({navigation}) {
 
     return (
         <View style={style.View}>
-            <Title style={style.Titulo}>Informe seu e-mail e senha</Title>
+            <Title style={style.Titulo}>Criar conta</Title>
             <View>
                 <TextInput
                     keyboardType="email-address"
 
                     style={style.inputs}
                     onChangeText={(email) => setEmail(email)}
-                    label='E-mail'
-                    placeholder='E-mail'
+                    label='E-mail' 
                 />
                 <TextInput
                     style={style.inputs}
                     onChangeText={(pass) => setPassword(pass)}
-                    label="Senha"
-                    placeholder="Senha"
+                    label="Senha" 
                     secureTextEntry
                 />
                 <TextInput
                     style={style.inputs}
                     onChangeText={(pass) => setPasswordCheck(pass)}
-                    label="Senha"
-                    placeholder="Senha"
+                    label="Confirme a senha"
                     secureTextEntry
                 />
                 <Button style={style.Button} onPress={doLogin}>Cadastrar</Button>

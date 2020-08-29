@@ -24,6 +24,10 @@ export default function Login({navigation}) {
     console.log(password);
   }
 
+  function forgotPass(){
+    navigation.navigate('Password');
+  }
+
   return (
     <View style={style.sentence}>
       <Title style={style.Titulo}>Informe seu e-mail e senha</Title>
@@ -44,6 +48,11 @@ export default function Login({navigation}) {
           secureTextEntry
         />
         <Button style={style.Button} onPress={doLogin}>Entrar</Button>
+
+        
+        <Button style={style.Button}  onPress={forgotPass}>Esqueceu a senha?</Button>
+
+
 
       </View>
         <FAB style={style.fab} icon="plus" onPress={() => navigation.navigate('SignUp')} />

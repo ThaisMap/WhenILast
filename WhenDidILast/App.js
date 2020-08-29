@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth';
 import Dashboard from './src/pages/dashboard';
 import Login from './src/pages/login/email';
 import Signup from './src/pages/login/signup';
+import Password from './src/pages/login/forgotPass';
 import LoginOptions from './src/pages/loginOptions';
 import SplashScreen from './src/pages/splash';
 
@@ -37,6 +38,7 @@ function App() {
             <Stack.Screen name="LoginOptions" options={{ title: 'Opções de login' }} component={LoginOptions} />
             <Stack.Screen name="EmailLogin" options={{ title: 'Login com e-mail' }} component={Login} />
             <Stack.Screen name="SignUp" options={{ title: 'Cadastrar E-mail' }} component={Signup} />
+            <Stack.Screen name="Password" options={{ title: 'Esqueceu a senha' }} component={Password} />
           </>
         ) : (
             <Stack.Screen name="DashBoard" component={Dashboard} />

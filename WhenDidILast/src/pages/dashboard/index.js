@@ -10,11 +10,11 @@ export default function Dashboard() {
 
   return (
     <View style={style.View}>
-      <Title>Yay, youre in</Title>
+      <Title>Aee, você entrou</Title>
       <Button
         style={style.Button}
         mode="contained"
-        onPress={logout}>Go Back Out</Button>
+        onPress={logout}>Sair de novo</Button>
     </View>
   );
 }
