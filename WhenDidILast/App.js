@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import auth from '@react-native-firebase/auth';
-
-import Dashboard from './src/pages/dashboard';
-import Login from './src/pages/login/email';
-import Signup from './src/pages/login/signup';
-import Password from './src/pages/login/forgotPass';
-import LoginOptions from './src/pages/loginOptions';
-import SplashScreen from './src/pages/splash';
+ 
+import Login from './src/Screens/Login/Email';
+import Signup from './src/Screens/Login/SignUp';
+import Password from './src/Screens/Login/ForgotPass';
+import SplashScreen from './src/Screens/Login/SplashScreen';
+import Menu from './src/Screens/InApp/DrawerMenu';
+import LoginOptions from './src/Screens/Login/LandingPage';
 
 const Stack = createStackNavigator();
 
@@ -32,7 +32,7 @@ function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator headerMode={false}>
         {user == null ? (
           <>
             <Stack.Screen name="LoginOptions" options={{ title: 'Opções de login' }} component={LoginOptions} />
@@ -41,7 +41,9 @@ function App() {
             <Stack.Screen name="Password" options={{ title: 'Esqueceu a senha' }} component={Password} />
           </>
         ) : (
-            <Stack.Screen name="DashBoard" component={Dashboard} />
+          <>
+            <Stack.Screen name="When did I Last?" component={Menu} />
+            </>
           )}
       </Stack.Navigator>
     </NavigationContainer>

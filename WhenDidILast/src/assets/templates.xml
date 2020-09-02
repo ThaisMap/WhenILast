@@ -12,4 +12,22 @@ export default function Sample(){
     );
 }
 	</EmptyScreen>
+    <EmptyPaper>
+import React from 'react';
+import { View } from "react-native";
+import { Title } from 'react-native-paper';
+
+export default function NewPage(){
+    return(
+    <View>
+        <Title>Awesome!</Title>
+    </View>
+    );
+}
+    </EmptyPaper>
+
+<ChangeDir>
+cd Documentos/Projetos/WhenILast/WhenDidILast
+npm start
+</ChangeDir>
 </Samples>
