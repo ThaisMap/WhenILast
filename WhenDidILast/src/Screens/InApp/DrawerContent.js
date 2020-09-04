@@ -2,13 +2,8 @@ import React, { useState } from 'react';
 import { View, StyleSheet } from "react-native";
 import { Title, Drawer, Text, Switch, TouchableRipple } from 'react-native-paper';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import auth from '@react-native-firebase/auth';
-
-function logout() {
-    auth().signOut();
-  }
-
-
+import { logout } from '../../api/firebase';
+ 
 export default function DrawerContent(props) { 
     const [isDarkTheme, SetIsDarkTheme] = useState(false);
     const toggleTheme = () => {

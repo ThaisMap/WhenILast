@@ -1,30 +1,17 @@
 import React, { useState } from 'react';
 import { TextInput, Button, Title, FAB } from "react-native-paper";
 import { View, StyleSheet, Alert } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import { signInwithEmail } from '../../api/firebase';
 
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
   function doLogin() {
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {})
-      .catch((error) => {
-        if (error.code === 'auth/wrong-password') {
-          Alert.alert('Senha incorreta!');
-        }
-        if (error.code === 'auth/user-not-found') {
-          Alert.alert('E-mail não cadastrado! ');
-        }
-        console.log(error.code);
-      });
-    console.log(email);
-    console.log(password);
+      signInwithEmail(email, password)
   }
 
-  function forgotPass(){
+  function forgotPass() {
     navigation.navigate('Password');
   }
 
@@ -49,13 +36,13 @@ export default function Login({navigation}) {
         />
         <Button style={style.Button} onPress={doLogin}>Entrar</Button>
 
-        
-        <Button style={style.Button}  onPress={forgotPass}>Esqueceu a senha?</Button>
+
+        <Button style={style.Button} onPress={forgotPass}>Esqueceu a senha?</Button>
 
 
 
       </View>
-        <FAB style={style.fab} icon="plus" onPress={() => navigation.navigate('SignUp')} />
+      <FAB style={style.fab} icon="plus" onPress={() => navigation.navigate('SignUp')} />
     </View>
   );
 }
@@ -67,13 +54,13 @@ const style = StyleSheet.create({
   },
   Titulo: {
     alignSelf: 'center'
-  }, 
+  },
   sentence: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',
     margin: 30,
-},
+  },
   Button: {
     justifyContent: 'center',
   },

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { TextInput, Button, Title } from "react-native-paper";
-import { View, Text, StyleSheet, Alert } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import { View, StyleSheet } from 'react-native';
+import { signUp } from '../../api/firebase';
+
 
 export default function Signup({navigation}) {
     const [email, setEmail] = useState();
@@ -10,24 +11,11 @@ export default function Signup({navigation}) {
 
     function doLogin() {
         if (password == passwordCheck) {
-            auth()
-                .createUserWithEmailAndPassword(email, password)
-                .then(() => navigation.navigate('EmailLogin'))
-                .catch((error) => {
-                    if (error.code === 'auth/email-already-in-use') {
-                        Alert.alert('E-mail já cadastrado.');
-                    }
-
-                    if (error.code === 'auth/invalid-email') {
-                        Alert.alert('Endereço de e-mail inválido!');
-                    }
-                    console.log(error.code);
-                });
-            console.log(email);
-            console.log(password);
+            if(signUp(email, password))
+                navigation.navigate('EmailLogin');
         }
         else
-            Alert.alert('As senhas não são iguais!');
+            alert('As senhas não são iguais!');
     }
 
     return (

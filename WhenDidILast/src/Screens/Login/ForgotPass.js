@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { TextInput, Button, Title, FAB } from "react-native-paper";
 import { View, StyleSheet, Alert } from 'react-native';
-import auth from '@react-native-firebase/auth';
+import { sendResetEmail } from '../../api/firebase';
 
 export default function Login({navigation}) {
   const [email, setEmail] = useState();
 
-  function sendResetEmail() {
-    auth().sendPasswordResetEmail(email);
-    Alert.alert("Um link para alteração de senha foi enviado para o e-mail informado.");
+  function sendEmail() {
+    sendResetEmail(email);
     navigation.navigate('EmailLogin');
   }
 
@@ -24,7 +23,7 @@ export default function Login({navigation}) {
           label='E-mail'
           placeholder='E-mail'
         />
-        <Button style={style.Button} onPress={sendResetEmail}>Enviar link</Button>         
+        <Button style={style.Button} onPress={sendEmail}>Enviar link</Button>         
 
       </View> 
     </View>

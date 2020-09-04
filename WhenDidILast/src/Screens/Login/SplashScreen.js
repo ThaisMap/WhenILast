@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { ActivityIndicator } from 'react-native-paper';
 
 export default function SplashScreen() {
     return (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <Text>Carregando, aguente firme</Text>
+           <ActivityIndicator size='large' />
         </View>
     );
 }
