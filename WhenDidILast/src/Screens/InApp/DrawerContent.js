@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet } from "react-native";
-import { Title, Drawer, Text, Switch, TouchableRipple } from 'react-native-paper';
+import { useTheme, Title, Drawer, Text, Switch, TouchableRipple } from 'react-native-paper';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { logout } from '../../api/firebase';
+import { ThemeContext } from "../../Components/context";
  
 export default function DrawerContent(props) { 
-    const [isDarkTheme, SetIsDarkTheme] = useState(false);
-    const toggleTheme = () => {
-        SetIsDarkTheme(!isDarkTheme);
-    }
+    const paperTheme = useTheme();
+
+    const { toggleTheme } = React.useContext(ThemeContext);
     return (
         <View style={{ flex: 1 }}>
              <View style={styles.titleSection}>
@@ -31,12 +31,12 @@ export default function DrawerContent(props) {
                     <Drawer.Item
                         label='Premium' 
                         onPress={() => {}}
-                    />
+                    /> 
                     <TouchableRipple onPress={() => { toggleTheme() }}>
                         <View style={styles.preference}>
                             <Text>Modo escuro</Text>
                             <View pointerEvents="none">
-                                <Switch value={isDarkTheme} />
+                                <Switch value={paperTheme.dark} />
                             </View>
                         </View>
                     </TouchableRipple>
