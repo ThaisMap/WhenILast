@@ -13,7 +13,7 @@ export default function App() {
   return (
       <Drawer.Navigator 
       drawerContent={props => <DrawerContent {...props} />}
-      initialRouteName="Dashboard">
+      initialRouteName="NewCategory">
         <Drawer.Screen name="Dashboard" component={Dashboard} />
         <Drawer.Screen name="NewCategory" component={NewCategory} />
       </Drawer.Navigator>

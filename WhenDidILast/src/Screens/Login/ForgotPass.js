@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, Button, Title, FAB } from "react-native-paper";
 import { View, StyleSheet, Alert } from 'react-native';
-import { sendResetEmail } from '../../api/firebase';
+import { sendResetEmail } from '../../api/firebase/login';
 
 export default function Login({navigation}) {
   const [email, setEmail] = useState();

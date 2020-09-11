@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, Button, Title } from "react-native-paper";
 import { View, StyleSheet } from 'react-native';
-import { signUp } from '../../api/firebase';
+import { signUp } from '../../api/firebase/login';
 
 
 export default function Signup({navigation}) {

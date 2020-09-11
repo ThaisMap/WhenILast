@@ -1,0 +1,91 @@
+{
+    "categories": {
+        "1": {
+            "uid": "thais.marpi_1234",
+            "name": "House chores",
+            "icon": "house"
+        },
+        "2": {
+            "uid": "thais.marpi_1234",
+            "name": "Bad stuff",
+            "icon": "block-helper"
+        },
+        "3": {
+            "uid": "hudsonblz_1145",
+            "name": "Car",
+            "icon": "car" 
+        }
+    },
+    "activities": {
+        "1": {
+            "name": "Clean fridge",
+            "uid": "thais.marpi_1234",
+            "categoryId": "1",
+            "categoryName": "House chores",
+            "notificate": true,
+            "notificationDays": 60,
+            "dates": {
+                "01-01-2020": "Who cleans the fridge at january 1st?",
+                "01-03-2020": "",
+                "01-06-2020": "Nasty fridge"
+            }
+        },
+        "2": {
+            "name": "Check the gutter",
+            "uid": "thais.marpi_1234",
+            "categoryId": "1",
+            "categoryName": "House chores",
+            "notificate": true,
+            "notificationDays": 180,
+            "dates": {
+                "01-10-2019": "It was clean"
+            }
+        },
+        "3": {
+            "name": "Had a fever",
+            "uid": "thais.marpi_1234",
+            "categoryId": "2",
+            "categoryName": "Bad stuff",
+            "notificate": false,
+            "notificationDays": 0,
+            "dates": {
+                "02-01-2020": "Maybe I shouldn't have cleaned the fridge"
+            }
+        },
+        "4": {
+            "name": "See a spider",
+            "uid": "thais.marpi_1234",
+            "categoryId": "2",
+            "categoryName": "Bad stuff",
+            "notificate": false,
+            "notificationDays": 0,
+            "dates": {
+                "15-03-2020": "It was a huge modafocker"
+            }
+        },
+        "5": {
+            "name": "Change oil",
+            "uid": "hudsonblz_1145",
+            "categoryId": "1",
+            "categoryName": "Car",
+            "notificate": true,
+            "notificationDays": 120,
+            "dates": {
+                "01-02-2020": "60kkm",
+                "01-06-2020": "100kkm"
+            }
+        },
+        "6": {
+            "name": "Replace headlight",
+            "uid": "hudsonblz_1145",
+            "categoryId": "3",
+            "categoryName": "Car",
+            "notificate": false,
+            "notificationDays": 0,
+            "dates": {
+                "01-02-2020": "Main bulb, driver side",
+                "01-04-2020": "Main bulb, passenger side"
+            }
+        }
+    }
+}

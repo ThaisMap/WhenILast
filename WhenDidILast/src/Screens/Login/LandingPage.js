@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { signInWithGoogle } from '../../api/firebase';
+import { signInWithGoogle } from '../../api/firebase/login';
 import { Button, Title } from 'react-native-paper';
 
 async function onGoogleButtonPress() {

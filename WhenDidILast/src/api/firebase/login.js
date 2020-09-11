@@ -2,6 +2,7 @@ import React from 'react';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
 
+
 GoogleSignin.configure({
     webClientId: '975121724951-0dp1v2a39u7hnvkv24khbbl5jn9meqtf.apps.googleusercontent.com',
 });
@@ -29,9 +30,7 @@ export function signInwithEmail(email, password) {
                 alert('E-mail não cadastrado! ');
             }
             console.log(error.code);
-        });
-    console.log(email);
-    console.log(password);
+        }); 
 }
 
 export function sendResetEmail(email) {

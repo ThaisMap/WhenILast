@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from "react-native";
 import { useTheme, Title, Drawer, Text, Switch, TouchableRipple } from 'react-native-paper';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
-import { logout } from '../../api/firebase';
+import { logout } from '../../api/firebase/login';
 import { ThemeContext } from "../../Components/context";
  
 export default function DrawerContent(props) { 
