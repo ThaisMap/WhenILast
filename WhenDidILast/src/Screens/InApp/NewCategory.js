@@ -6,11 +6,11 @@ import { Dropdown } from "react-native-material-dropdown-v2";
 import { Create } from "../../api/firebase/category";
 
 export default class reactApp extends Component {
-    constructor() {
+    constructor(navigation) {
         super()
         this.state = {
             icon: 'help',
-            name: 'Nova categoria'
+            name: ''
         }
     }
 
@@ -19,7 +19,24 @@ export default class reactApp extends Component {
     }
 
     createCategory = () => {
-        Create(this.state);
+        if (Create(this.state)) {
+            alert(`Categoria "${this.state.name}" criada`)
+            this.cleanState();
+        }
+        else {
+            alert("Algo deu errado");
+        }
+    }
+
+    cleanState = () => {
+        this.setState({
+            icon: 'help',
+            name: ''
+        });
+    }
+
+    updateName = (newName) => {
+        this.setState({ name: newName })
     }
 
     render() {
@@ -27,7 +44,9 @@ export default class reactApp extends Component {
             <View style={style.view}>
                 <Title style={style.title}>Criar Categoria</Title>
                 <View>
-                    <TextInput style={style.input} value={this.state.name} label='Nome da categoria' />
+                    <TextInput style={style.input}
+                        value={this.state.name}
+                        onChangeText={(newName) => this.updateName(newName)} label='Nome da categoria' />
                     <View style={style.lateral}>
                         <View style={style.dropdown}>
                             <Dropdown
@@ -54,7 +73,7 @@ const possibleIcons = [
     { value: 'phone', label: 'Ligações' },
     { value: 'book', label: 'Livro' },
     { value: 'human', label: 'Saúde' },
-    { value: 'airplane', label: 'Viagem' }
+    { value: 'airplane', label: 'Avião' }
 ];
 
 const style = StyleSheet.create({
@@ -67,6 +86,7 @@ const style = StyleSheet.create({
     },
     input: {
         marginHorizontal: 20,
+        backgroundColor: 'transparent'
     },
     dropdown: {
         flex: 1
