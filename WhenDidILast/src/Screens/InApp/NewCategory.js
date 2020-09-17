@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { View, StyleSheet } from "react-native";
 import { Title, TextInput, Button, IconButton } from 'react-native-paper';
 import { Dropdown } from "react-native-material-dropdown-v2";
 
 import { Create } from "../../api/firebase/category";
 
-export default class reactApp extends Component {
-    constructor(navigation) {
+export default class NewCategory extends Component {
+    constructor() {
         super()
         this.state = {
             icon: 'help',

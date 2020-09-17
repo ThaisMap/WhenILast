@@ -20,3 +20,23 @@ export const Create = (objeto) => {
     return works;
 };
 
+
+export async function GetList(categoriesRetrieved) { 
+    const user = auth().currentUser;
+    categoriesRef.where('uid', '==', user.uid).onSnapshot((snap)=>{
+        const categories = [];
+
+        snap.forEach(doc => { 
+            categories.push({
+                ...doc._data,
+                key: doc.id,
+            });
+        });
+        categoriesRetrieved(categories);
+    } , onError); 
+   
+};
+ 
+function onError(error){
+    console.error(error);
+}

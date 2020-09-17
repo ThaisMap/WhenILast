@@ -4,34 +4,73 @@ import { useTheme, Title, Drawer, Text, Switch, TouchableRipple } from 'react-na
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { logout } from '../../api/firebase/login';
 import { ThemeContext } from "../../Components/context";
+import { GetList } from "../../api/firebase/category";
  
-export default function DrawerContent(props) { 
+export default function DrawerContent(props) {
     const paperTheme = useTheme();
-
     const { toggleTheme } = React.useContext(ThemeContext);
+    const teste = ['um', 'dois', 'tres'];
+
+    const [categories, setCategories] = React.useState([]);
+
+    const onListReceived = listReceived => {
+        setCategories(listReceived);
+        categories.forEach(item => {
+            DrawerItemsData.push({
+                label: item.name,
+                icon: item.icon,
+                key: item.key
+            })
+        })
+    }
+
+    React.useEffect(() => {
+        GetList(onListReceived);
+    }
+        , []);
+   
+
     return (
-        <View style={{ flex: 1 }}>
-             <View style={styles.titleSection}>
+        <View style={
+            paperTheme.dark ?
+                styles.drawerContentDark
+                :
+                styles.drawerContentLight
+        }>
+            <Drawer.Section>
+                <View style={styles.titleSection}>
                     <Title>When did You last...?</Title>
                 </View>
-            <DrawerContentScrollView {...props}>               
+            </Drawer.Section>
+
+            <DrawerContentScrollView  {...props}
+            >
                 <Drawer.Section title='Categorias'>
                     <Drawer.Item
                         label='Ver todas'
                         icon='checkbox-multiple-blank-circle'
-                        onPress={() => {props.navigation.navigate('Dashboard')}}
+                        onPress={() => { props.navigation.navigate('Dashboard') }}
                     />
+                    {categories.map((item) => (
+                        <Drawer.Item
+                            label={item.name}
+                            icon={item.icon}
+                            key={item.key} 
+                        />
+                    ))}
+                    </Drawer.Section>
+                    <Drawer.Section>
                     <Drawer.Item
                         label='Nova Categoria'
                         icon='plus'
-                        onPress={() => {props.navigation.navigate('NewCategory')}}
-                    />
+                        onPress={() => { props.navigation.navigate('NewCategory') }}
+                    /> 
                 </Drawer.Section>
                 <Drawer.Section title="Preferências">
                     <Drawer.Item
-                        label='Premium' 
-                        onPress={() => {}}
-                    /> 
+                        label='Premium'
+                        onPress={() => { }}
+                    />
                     <TouchableRipple onPress={() => { toggleTheme() }}>
                         <View style={styles.preference}>
                             <Text>Modo escuro</Text>
@@ -55,13 +94,19 @@ export default function DrawerContent(props) {
 }
 
 
+
+
 const styles = StyleSheet.create({
-    drawerContent: {
+    drawerContentDark: {
         flex: 1,
+        backgroundColor: '#266329'
+    },
+    drawerContentLight: {
+        flex: 1,
+        backgroundColor: '#81C784'
     },
     titleSection: {
         padding: 15,
-        backgroundColor: '#81C784'
     },
     title: {
         fontSize: 16,

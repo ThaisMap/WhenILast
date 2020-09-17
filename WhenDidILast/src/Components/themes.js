@@ -17,7 +17,7 @@ export const darkTheme = {
     roundness: 2,
     colors: {
       ...DarkTheme.colors,
-      primary: '#81C784',
-      accent: '#6BE186',
+      primary: '#266329',
+      accent: '#81C784',
     },
   };
