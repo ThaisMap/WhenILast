@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, StyleSheet } from "react-native";
-import { useTheme, Title, Drawer, Text, Switch, TouchableRipple } from 'react-native-paper';
+import { useTheme, Title, Drawer, Text, Switch, TouchableRipple, Surface } from 'react-native-paper';
 import { DrawerContentScrollView } from '@react-navigation/drawer';
 import { logout } from '../../api/firebase/login';
 import { ThemeContext } from "../../Components/context";
 import { GetList } from "../../api/firebase/category";
- 
+
 export default function DrawerContent(props) {
     const paperTheme = useTheme();
     const { toggleTheme } = React.useContext(ThemeContext);
-    const teste = ['um', 'dois', 'tres'];
+    const DrawerItemsData = [];
 
     const [categories, setCategories] = React.useState([]);
 
@@ -26,22 +26,19 @@ export default function DrawerContent(props) {
 
     React.useEffect(() => {
         GetList(onListReceived);
-    }
-        , []);
-   
+    }, []);
+
 
     return (
-        <View style={
-            paperTheme.dark ?
-                styles.drawerContentDark
-                :
-                styles.drawerContentLight
-        }>
-            <Drawer.Section>
-                <View style={styles.titleSection}>
+        <Surface style={styles.surface}>
+                <View style={
+                    paperTheme.dark ?
+                        styles.titleSectionDark
+                        :
+                        styles.titleSectionLight
+                }>
                     <Title>When did You last...?</Title>
                 </View>
-            </Drawer.Section>
 
             <DrawerContentScrollView  {...props}
             >
@@ -49,34 +46,36 @@ export default function DrawerContent(props) {
                     <Drawer.Item
                         label='Ver todas'
                         icon='checkbox-multiple-blank-circle'
-                        onPress={() => { props.navigation.navigate('Dashboard') }}
+                        onPress={() => { props.navigation.navigate('Dashboard', { trial: 'stand your ground' }) }}
                     />
                     {categories.map((item) => (
                         <Drawer.Item
                             label={item.name}
                             icon={item.icon}
-                            key={item.key} 
+                            key={item.key}
+                            onPress={() => {
+                                props.navigation.navigate('SingleCategory', {
+                                    name: item.name,
+                                    icon: item.icon,
+                                    key: item.key
+                                })
+                            }}
+
                         />
                     ))}
-                    </Drawer.Section>
-                    <Drawer.Section>
+                </Drawer.Section>
+                <Drawer.Section>
                     <Drawer.Item
                         label='Nova Categoria'
                         icon='plus'
                         onPress={() => { props.navigation.navigate('NewCategory') }}
-                    /> 
+                    />
                 </Drawer.Section>
                 <Drawer.Section title="Preferências">
-                    <Drawer.Item
-                        label='Premium'
-                        onPress={() => { }}
-                    />
-                    <TouchableRipple onPress={() => { toggleTheme() }}>
+                        <TouchableRipple onPress={() => { toggleTheme() }}>
                         <View style={styles.preference}>
-                            <Text>Modo escuro</Text>
-                            <View pointerEvents="none">
-                                <Switch value={paperTheme.dark} />
-                            </View>
+                            <Text>Modo escuro</Text> 
+                                <Switch value={paperTheme.dark} /> 
                         </View>
                     </TouchableRipple>
 
@@ -89,24 +88,23 @@ export default function DrawerContent(props) {
                     onPress={logout}
                 />
             </Drawer.Section>
-        </View>
+        </Surface>
     );
 }
-
-
-
+ 
 
 const styles = StyleSheet.create({
-    drawerContentDark: {
+    surface: {
         flex: 1,
+        elevation: 2
+    },
+    titleSectionDark: {
+        padding: 15,
         backgroundColor: '#266329'
     },
-    drawerContentLight: {
-        flex: 1,
-        backgroundColor: '#81C784'
-    },
-    titleSection: {
+    titleSectionLight: {
         padding: 15,
+        backgroundColor: '#81C784'
     },
     title: {
         fontSize: 16,

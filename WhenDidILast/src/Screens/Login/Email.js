@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextInput, Button, Title, FAB } from "react-native-paper";
-import { View, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { signInwithEmail } from '../../api/firebase/login';
 
 export default function Login({ navigation }) {
@@ -16,12 +16,11 @@ export default function Login({ navigation }) {
   }
 
   return (
-    <View style={style.sentence}>
+    <View style={style.view}>
       <Title style={style.Titulo}>Informe seu e-mail e senha</Title>
       <View >
         <TextInput
           keyboardType="email-address"
-
           style={style.inputs}
           onChangeText={(email) => setEmail(email)}
           label='E-mail'
@@ -55,7 +54,7 @@ const style = StyleSheet.create({
   Titulo: {
     alignSelf: 'center'
   },
-  sentence: {
+  view: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'stretch',

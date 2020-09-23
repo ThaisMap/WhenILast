@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from "react-native";
-import { Title, TextInput, Button, IconButton } from 'react-native-paper';
+import { Title, TextInput, Button, IconButton, Appbar } from 'react-native-paper';
 import { Dropdown } from "react-native-material-dropdown-v2";
 
 import { Create } from "../../api/firebase/category";
 
 export default class NewCategory extends Component {
+
     constructor() {
         super()
         this.state = {
             icon: 'help',
-            name: ''
+            name: '', 
         }
     }
 
@@ -42,7 +43,10 @@ export default class NewCategory extends Component {
     render() {
         return (
             <View style={style.view}>
-                <Title style={style.title}>Criar Categoria</Title>
+                <Appbar.Header>
+                <Appbar.Action icon='menu' onPress={() => { this.props.navigation.openDrawer() }} />
+                <Appbar.Content title='Criar Categoria' />
+            </Appbar.Header> 
                 <View>
                     <TextInput style={style.input}
                         value={this.state.name}

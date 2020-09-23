@@ -1,20 +1,14 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import auth from '@react-native-firebase/auth';
-import { Title, Button } from 'react-native-paper';
+ import { Title,  Text , Button } from 'react-native-paper'; 
 
-export default function Dashboard() {
-  function logout() {
-    auth().signOut();
-  }
-
+export default function Dashboard({route }) {
+  const { trial } = route.params;
+   
   return (
     <View style={style.View}>
       <Title>Aee, você entrou</Title>
-      <Button
-        style={style.Button}
-        mode="contained"
-        onPress={logout}>Sair de novo</Button>
+      <Text>{JSON.stringify(trial)}</Text>
     </View>
   );
 }
