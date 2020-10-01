@@ -1,33 +1,45 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { Dropdown } from 'react-native-material-dropdown-v2';
 import { Appbar, Title, Text, TextInput, IconButton, FAB } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { Create } from "../../api/firebase/activity";
 
 export default class NewActivity extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dateString: '', 
-            showDatePicker: false, 
-            activity: {
-                date: new Date(),
-                notifications: false,
-                name: '',
-                notificationDays: 0,
-                comments: ''
-            }
+            showDatePicker: false,
+            category: this.props.route.params.categoryKey,
+            categoryName: this.props.route.params.categoryName,//navigation.getParam('categoryName', 'Sem nome'),
+            date: new Date(),
+            dateString: this.stringDate(new Date()),
+            notify: false,
+            name: '',
+            notificationDays: 0,
+            periodMultiplier: 1,
+            comments: ''
+
         }
+    }
+
+    stringDate = (date) => {
+        // 01, 02, 03, ... 29, 30, 31
+        var dd = (date.getDate() < 10 ? '0' : '') + date.getDate();
+        // 01, 02, 03, ... 10, 11, 12
+        var MM = ((date.getMonth() + 1) < 10 ? '0' : '') + (date.getMonth() + 1);
+        // 1970, 1971, ... 2015, 2016, ...
+        var yyyy = date.getFullYear();
+        return (dd + '/' + MM + '/' + yyyy);
     }
 
     handleDatePicked = (event, selectedDate) => {
         const datePicked = selectedDate || date;
         this.setState({
             showDatePicker: false,
-            dateString: `${datePicked.getDate()}/${datePicked.getMonth() + 1}/${datePicked.getFullYear()}`,
-            activity:{ date: datePicked }
+            dateString: this.stringDate(datePicked),
+            date: datePicked
         });
-        console.log(this.state.date);
     };
 
     handleCalendarClick = () => {
@@ -35,7 +47,28 @@ export default class NewActivity extends Component {
     };
 
     handleAlarmToggle = () => {
-        this.setState({ activity:{ notifications: !this.state.notifications }});
+        this.setState({ notify: !this.state.notify });
+    };
+
+    handleNotificationDaysChange = (value) => {
+
+        const dias = Number(value) * this.state.periodMultiplier;
+        this.setState({ notificationDays: dias });
+    };
+
+    handleFabClick = () => {
+        const activity = {
+            name: this.state.name,
+            category: this.state.category,
+            notify: this.state.notify,
+            notificationDays: this.state.notificationDays            
+        };
+        const date = {
+            date: this.state.date,
+            comment: this.state.comments,
+        }; 
+        Create(activity, date);
+        this.props.navigation.goBack();
     };
 
     render() {
@@ -48,10 +81,11 @@ export default class NewActivity extends Component {
                 <View style={style.conteudo}>
                     <View style={style.lateral}>
                         <Title>Categoria: </Title>
-                        <Title>{this.props.categoryName}</Title>
+                        <Title>{this.state.categoryName}</Title>
                     </View>
                     <TextInput
                         style={style.inputs}
+                        onChangeText={(activityName) => this.setState({ name: activityName })}
                         placeholder='Atividade' />
 
                     {this.state.showDatePicker && (
@@ -65,53 +99,55 @@ export default class NewActivity extends Component {
                     <View style={style.lateral}>
                         <IconButton icon='calendar' onPress={this.handleCalendarClick} />
                         <View style={style.inputView}>
-                            <TextInput
-                                keyboardType='number-pad'
-                                placeholder='Escolha uma data'
-                                disabled
-                                value={this.state.dateString}
-                                style={style.inputs}
-                            />
+
+                            <Pressable onPress={this.handleCalendarClick} >
+                                <TextInput 
+                                    disabled
+                                    value={this.state.dateString}
+                                    style={style.inputs} />
+                            </Pressable>
                         </View>
                     </View>
                     <Text>Lembrar após</Text>
                     <View style={style.lateral}>
 
-                        <IconButton icon={this.state.activity.notifications ? 'alarm-check' : 'alarm-off'} 
-                        onPress={this.handleAlarmToggle} />
+                        <IconButton icon={this.state.notify ? 'alarm-check' : 'alarm-off'}
+                            onPress={this.handleAlarmToggle} />
                         <View style={style.inputView}>
                             <TextInput
-                                keyboardType='numeric'
+                                keyboardType='number-pad'
                                 style={style.inputs}
+                                onChangeText={(value) => this.handleNotificationDaysChange(value)}
                                 placeholder='0' />
                         </View>
                         <View style={style.inputView}>
-                            <Dropdown placeholder='selecione' style={style.inputs} data={periods} />
+                            <Dropdown
+                                placeholder='selecione'
+                                style={style.inputs}
+                                value={1}
+                                onChangeText={(value) => this.setState({ periodMultiplier: value })}
+                                data={periods} />
                         </View>
                     </View>
                     <TextInput
                         style={style.Biginputs}
                         multiline
-                        label='Observações' />
+                        onChangeText={(value) => this.setState({ comments: value })}
+                        label='Comentário' />
 
                 </View>
                 <FAB style={style.fab} icon='check'
-                    onPress={() => {
-                        this.props.navigation.goBack()
-                    }} />
+                    onPress={this.handleFabClick} />
             </View>
         );
     }
-
-
-
 }
 
 const periods = [
-    { value: 'dias' },
-    { value: 'semanas' },
-    { value: 'meses' },
-    { value: 'anos' },
+    { value: 1, label: 'dias' },
+    { value: 7, label: 'semanas' },
+    { value: 30, label: 'meses' },
+    { value: 365, label: 'anos' },
 ];
 
 const style = StyleSheet.create({
