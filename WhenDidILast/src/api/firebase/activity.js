@@ -40,3 +40,23 @@ function validateActivity(activity) {
         (!activity.notify || activity.notificationDays > 0)
     );
 }
+
+export async function GetActivitiesFromCategory(categoriesId, activitiesRetrieved) {
+    const user = auth().currentUser;
+    activitiesRef.where('uid', '==', user.uid).onSnapshot((snap) => {
+        const activities = [];
+
+        snap.forEach(doc => {
+            activities.push({
+                ...doc._data,
+                key: doc.id,
+            });
+        });
+        activitiesRetrieved(activities);
+    }, onError);
+
+};
+
+function onError(error) {
+    console.error(error);
+}
