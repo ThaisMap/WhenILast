@@ -18,18 +18,17 @@ export default function SingleCategory({ route, navigation }) {
 
     const onListReceived = listReceived => {
         setActivities(listReceived);
-        activities.forEach(item => {
-            DrawerItemsData.push({
-                label: item.name,
-                icon: item.icon,
-                key: item.key
-            })
-        })
+         
+        console.log(activities);
     }
 
+    const teste = () => console.log(activities);
+
     React.useEffect(() => {
+        setActivities([]);
         GetActivitiesFromCategory(key, onListReceived);
-    }, []);
+        console.log(`chamada para ${name} - ${key}`)
+    }, [name]);
 
 
     return (
@@ -39,6 +38,8 @@ export default function SingleCategory({ route, navigation }) {
                 <Appbar.Content title={name} />
             </Appbar.Header>
          
+            
+
             <FAB style={style.fab} icon='plus' onPress={showDialog} />
 
 

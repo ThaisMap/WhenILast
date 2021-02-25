@@ -43,7 +43,7 @@ function validateActivity(activity) {
 
 export async function GetActivitiesFromCategory(categoriesId, activitiesRetrieved) {
     const user = auth().currentUser;
-    activitiesRef.where('uid', '==', user.uid).onSnapshot((snap) => {
+    activitiesRef.where('uid', '==', user.uid).where('category', '==', categoriesId).onSnapshot((snap) => {
         const activities = [];
 
         snap.forEach(doc => {
@@ -60,3 +60,19 @@ export async function GetActivitiesFromCategory(categoriesId, activitiesRetrieve
 function onError(error) {
     console.error(error);
 }
+
+export async function GetAllActivities (activitiesRetrieved) {
+    const user = auth().currentUser;
+    activitiesRef.where('uid', '==', user.uid).onSnapshot((snap) => {
+        const activities = [];
+
+        snap.forEach(doc => {
+            activities.push({
+                ...doc._data,
+                key: doc.id,
+            });
+        });
+        activitiesRetrieved(activities);
+    }, onError);
+
+};
