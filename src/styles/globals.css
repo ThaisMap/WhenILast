@@ -2,17 +2,15 @@
   --white: #fff;
   --black: #000;
   --paper: #fdfdfd;
-  --mint-backgroud: #f0fffc;
+  --backgroud: #f0fffc;
   --green-dark: #006e25;
   --gray: #c4c4c4;
 }
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: "Montserrat", sans-serif;
-  background-color: var(--mint-backgroud);
+  font-family: "Roboto", sans-serif;
+  background-color: var(--backgroud);
 }
 
 a {
@@ -22,4 +20,6 @@ a {
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
