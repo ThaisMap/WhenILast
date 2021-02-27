@@ -5,11 +5,12 @@
   --backgroud: #f0fffc;
   --green-dark: #006e25;
   --gray: #c4c4c4;
+  --gray-line: #aaa;
 }
 
 html,
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   background-color: var(--backgroud);
 }
 
