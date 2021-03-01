@@ -9,8 +9,7 @@ export interface Activity {
 
 interface ActivityContextData {
   activities: Activity[];
-  add(activity: Activity): void;
-  change(activity: Activity): void;
+  addOrUpdate(activity: Activity): void;
 }
 
 const ActivitiesContext = createContext<ActivityContextData>(
@@ -22,8 +21,10 @@ export const ActivitiesProvider: React.FC = ({ children }) => {
     defaultActivities
   );
 
-  function add(activity: Activity) {
-    setActivityList([...activityList, activity]);
+  function addOrUpdate(activity: Activity) {
+    activity.id
+      ? change(activity)
+      : setActivityList([activity, ...activityList]);
   }
 
   function change(activity: Activity) {
@@ -39,7 +40,7 @@ export const ActivitiesProvider: React.FC = ({ children }) => {
 
   return (
     <ActivitiesContext.Provider
-      value={{ activities: activityList, add, change }}>
+      value={{ activities: activityList, addOrUpdate }}>
       {children}
     </ActivitiesContext.Provider>
   );
@@ -61,7 +62,7 @@ const defaultActivities: Activity[] = [
   {
     id: 2,
     title: 'Revisão no carro',
-    date: new Date('2021-01-05 12:00'),
+    date: new Date('2020-12-05 12:00'),
     comment: 'Trocou tanta coisa...',
   },
 ];

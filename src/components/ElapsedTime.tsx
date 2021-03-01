@@ -6,7 +6,7 @@ export default function ElapsedTime(props) {
   return (
     <div className={styles.container}>
       <p className={styles.number}> {prefix} </p>
-      <p> {suffix} </p>
+      <p className={styles.suffix}> {suffix} </p>
     </div>
   );
 }

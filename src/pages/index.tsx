@@ -1,7 +1,5 @@
 import Head from 'next/head';
-import { useContext, useEffect } from 'react';
-import Card from '../components/Card';
-import CardsList from '../components/CardsList';
+import CardsList from '../components/cards/CardsList';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import styles from '../styles/Home.module.css';

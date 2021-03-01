@@ -5,7 +5,7 @@
   justify-content: center;
   text-align: center;
   color: var(--green-dark);
-  border-right: 1px solid var(--gray-line);
+  border-right: 1px solid var(--gray);
   padding: 0.5em;
   padding-right: 1rem;
   width: 7rem;
@@ -14,4 +14,8 @@
 .number {
   font-family: 'Merriweather', serif;
   font-size: 4rem;
+}
+
+.suffix {
+  font-size: 0.9rem;
 }
