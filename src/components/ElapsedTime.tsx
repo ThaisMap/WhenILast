@@ -11,7 +11,7 @@ export default function ElapsedTime(props) {
   );
 }
 
-function elapsedTime(date) {
+function elapsedTime(date: string) {
   const msInDay = 1000 * 60 * 60 * 24;
   const msInMonth = msInDay * 30;
   const msInYear = msInDay * 365;

@@ -12,27 +12,26 @@ export default function InputCard(props) {
   const { addOrUpdate } = useContext(ActivitiesContext);
   const { onEditClick } = props;
   const [activity, setActivity] = useState(props.activity);
-
   function handleDateChange(selected) {
     setActivity({
       ...activity,
       date: selected,
     });
-  }
+}
 
   function handleCommentChange(event) {
     setActivity({
       ...activity,
       comment: event.target.value,
     });
-  }
+}
 
   function handleTitleChange(event) {
     setActivity({
       ...activity,
       title: event.target.value,
     });
-  }
+}
 
   function handleSaveClick() {
     addOrUpdate(activity);
@@ -47,12 +46,11 @@ export default function InputCard(props) {
           name='title'
           id='title'
           placeholder='Título da Atividade'
-          onChange={handleTitleChange}
+          onBlur={handleTitleChange}
           defaultValue={activity.title}
         />
         <DatePicker
-          selected={activity.date}
-          locale='pt-BR'
+          selected={activity.date}          
           placeholderText='Quando foi'
           dateFormat='dd/MM/yyyy'
           onChange={handleDateChange}
@@ -63,7 +61,7 @@ export default function InputCard(props) {
           id='comment'
           placeholder='Comentários'
           defaultValue={activity.comment}
-          onChange={handleCommentChange}
+          onBlur={handleCommentChange}
         />
       </div>
       <button className={styles.saveButton} onClick={handleSaveClick}>

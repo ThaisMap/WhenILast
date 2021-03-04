@@ -11,7 +11,7 @@
 }
 
 .title {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   color: var(--green-dark);
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
@@ -27,7 +27,12 @@
   font-weight: 300;
 }
 
+.editButtonHide {
+  display: none;
+}
+
 .editButton {
+  display: block;
   padding: 0.5em;
   background: transparent;
   border: none;
