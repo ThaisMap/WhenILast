@@ -1,7 +1,22 @@
 import styles from '../styles/Header.module.css';
 import { FaSearch } from 'react-icons/fa';
+import { useContext, useState } from 'react';
+import ActivitiesContext from '../contexts/activities';
 
 export default function Header() {
+  const { applyFilter } = useContext(ActivitiesContext);
+
+  const [searchText, setSearchText] = useState('');
+
+  function handleSearchClick(event) {
+    console.log(searchText);
+    applyFilter(searchText);
+  }
+
+  function handleChange(event) {
+    setSearchText(event.target.value);
+  }
+
   return (
     <header className={styles.container}>
       <img
@@ -15,10 +30,12 @@ export default function Header() {
           name='search'
           placeholder='Pesquisar...'
           id='search'
+          value={searchText}
+          onChange={handleChange}
+          onBlur={handleSearchClick}
         />
-        <button>
-          {' '}
-          <FaSearch size={20} />{' '}
+        <button onClick={handleSearchClick}>
+          <FaSearch size={20} />
         </button>
       </div>
     </header>

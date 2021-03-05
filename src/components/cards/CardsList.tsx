@@ -8,7 +8,9 @@ export default function CardsList() {
   const { activities } = useContext(ActivitiesContext);
 
   const Cards = activities.map((act: Activity) => {
-    return <Card show={act} key={act.id} />;
+    if (act.visible) {
+      return <Card show={act} key={act.id} />;
+    }
   });
   return (
     <div className={styles.container}>
