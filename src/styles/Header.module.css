@@ -24,3 +24,7 @@
   border: none;
   transform: translateX(-100%);
 }
+
+.searchBox button:active {
+  color: var(--green-dark);
+}

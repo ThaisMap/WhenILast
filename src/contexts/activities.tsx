@@ -37,7 +37,7 @@ export const ActivitiesProvider: React.FC = ({ children }) => {
   }
 
   function addOrUpdate(activity: Activity) {
-    activity.id ? change(activity) : add(activity);
+    activity.id >= 0 ? change(activity) : add(activity);
   }
 
   function add(activity: Activity) {
