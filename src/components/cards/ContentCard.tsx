@@ -1,9 +1,18 @@
 import ElapsedTime from '../ElapsedTime';
-import { FaPen } from 'react-icons/fa';
+import { FaPen, FaTrashAlt } from 'react-icons/fa';
 import styles from '../../styles/cards/ContentCard.module.css';
+import { useContext } from 'react';
+import ActivitiesContext from '../../contexts/activities';
 
 export default function ContentCard(props) {
   const { activity, onEditClick } = props;
+
+  const { remove } = useContext(ActivitiesContext);
+
+  function handleDeleteClick() {
+    remove(activity);
+  }
+
   return (
     <>
       <div className={styles.icon}>
@@ -16,9 +25,14 @@ export default function ContentCard(props) {
         </p>
         <p className={styles.comment}>{activity.comment}</p>
       </div>
-      <button className={styles.editButton} onClick={onEditClick}>
-        <FaPen />
-      </button>
+      <div className={styles.iconButtons}>
+        <button className={styles.editButton} onClick={onEditClick}>
+          <FaPen />
+        </button>
+        <button className={styles.editButton} onClick={handleDeleteClick}>
+          <FaTrashAlt />
+        </button>
+      </div>
     </>
   );
 }

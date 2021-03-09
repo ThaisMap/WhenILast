@@ -13,6 +13,7 @@ interface ActivityContextData {
   activities: Activity[];
   addOrUpdate(activity: Activity): void;
   applyFilter(filter: string): void;
+  remove(activity: Activity): void;
 }
 
 const ActivitiesContext = createContext<ActivityContextData>(
@@ -57,9 +58,16 @@ export const ActivitiesProvider: React.FC = ({ children }) => {
     setActivityList(list);
   }
 
+  function remove(activity: Activity) {
+    const list = activityList.filter((act) => {
+      return act.id !== activity.id;
+    });
+    setActivityList(list);
+  }
+
   return (
     <ActivitiesContext.Provider
-      value={{ activities: activityList, addOrUpdate, applyFilter }}>
+      value={{ activities: activityList, addOrUpdate, applyFilter, remove }}>
       {children}
     </ActivitiesContext.Provider>
   );
