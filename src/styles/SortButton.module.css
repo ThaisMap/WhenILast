@@ -1,0 +1,10 @@
+.container button {
+  background: transparent;
+  border: none;
+  margin-right: 1rem;
+  color: var(--green-dark);
+}
+
+.container button:active {
+  color: var(--black);
+}

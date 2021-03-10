@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -8,23 +8,9 @@
   margin: 1rem 0;
   height: 5rem;
 }
-
-.searchBox input {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid var(--black);
-  margin-bottom: 2rem;
-  width: 30rem;
-  font-size: 1.1rem;
-  padding-inline-end: 2rem;
-}
-
-.searchBox button {
-  background: transparent;
-  border: none;
-  transform: translateX(-100%);
-}
-
-.searchBox button:active {
-  color: var(--green-dark);
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
 }
