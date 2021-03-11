@@ -40,7 +40,7 @@ export const ActivitiesProvider: React.FC = ({ children }) => {
   function add(activity: Activity) {
     activity.id = activityList.length;
     activity.visible = true;
-    sortAndUpdateList([activity, ...activityList]);
+    sortAndUpdateList(true, [activity, ...activityList]);
   }
 
   function update(activity: Activity) {
@@ -52,7 +52,7 @@ export const ActivitiesProvider: React.FC = ({ children }) => {
       }
     });
 
-    sortAndUpdateList(list);
+    sortAndUpdateList(true, list);
   }
 
   function remove(activity: Activity) {
@@ -63,7 +63,7 @@ export const ActivitiesProvider: React.FC = ({ children }) => {
   }
 
   function sortAndUpdateList(ascending: boolean, newList?: Activity[]) {
-    if (!newList) newList = [...activityList];
+    if (!newList) newList = Array.from(activityList);
 
     const list = newList.sort(function (a, b) {
       if (ascending) return b.date.getTime() - a.date.getTime();

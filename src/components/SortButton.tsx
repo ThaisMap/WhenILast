@@ -6,17 +6,18 @@ import ActivitiesContext from '../contexts/activities';
 
 export default function SortButton() {
   const { sort } = useContext(ActivitiesContext);
-  const [closestToFarther, setClosestToFarther] = useState(true);
+  //começa do mais recente primeiro
+  const [oldestToNewest, setOldestToNewest] = useState(false);
   function handleSortClick() {
-    sort(closestToFarther);
-    setClosestToFarther(!closestToFarther);
+    sort(oldestToNewest);
+    setOldestToNewest(!oldestToNewest);
   }
 
   return (
     <div className={styles.container}>
       <button onClick={handleSortClick}>
-        {/* {closestToFarther ? <FaSortUp size={20} /> : <FaSortDown size={20} />} */}
-        {closestToFarther ? (
+        {/* {oldestToNewest ? <FaSortUp size={20} /> : <FaSortDown size={20} />} */}
+        {oldestToNewest ? (
           <p>
             recentes <FaSortUp size={20} />
           </p>
